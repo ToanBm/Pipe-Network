@@ -55,8 +55,8 @@ ExecStart=/root/pipe/pop \
     --ram 4 \
     --max-disk 200 \
     --cache-dir /root/pipe/download_cache \
-    --pubKey SOLADDRESS \
-    --signup-by-referral-route 24e2c57a307e69ba
+    --pubKey YOUR-SOL-ADDRESS \
+    --signup-by-referral-route 85e8d2dd4e64f413
 Restart=always
 RestartSec=5
 LimitNOFILE=65536
