@@ -1,4 +1,29 @@
 # Pipe Network Devnet-2 Node Setup Guide
+## Update v0.2.3
+### Stop your node
+```
+cd /root/pipe
+```
+```
+sudo systemctl stop pipe
+```
+```
+rm -rf pop
+```
+### Download new version
+```
+wget https://dl.pipecdn.app/v0.2.3/pop
+```
+```
+chmod +x pop
+```
+### Start systemd
+```
+sudo systemctl daemon-reload
+sudo systemctl enable pipe
+sudo systemctl start pipe
+```
+----------- Done! ----------------------------
 ## System Requirements
 * Linux
 * Minimum 4GB RAM (configurable), more the better for higher rewards
