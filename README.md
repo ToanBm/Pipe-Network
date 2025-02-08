@@ -110,7 +110,7 @@ journalctl -u pipe -f
 ```
 ### 7. Check Node's Reputation and Scores
 ```
-cd $HOME && cd pipe
+cd /root/pipe
 ./pop --status
 ```
 You'll get following details representing your node's reputation
