@@ -1,9 +1,11 @@
 # Pipe Network Devnet-2 Node Setup Guide
-## Update v0.2.3
-### Stop your node
+## Update v0.2.4
+### Check Node's Reputation and Scores
 ```
 cd /root/pipe
+./pop --status
 ```
+### Stop your node
 ```
 sudo systemctl stop pipe
 ```
@@ -12,7 +14,7 @@ rm -rf pop
 ```
 ### Download new version
 ```
-wget https://dl.pipecdn.app/v0.2.3/pop
+wget https://dl.pipecdn.app/v0.2.4/pop
 ```
 ```
 chmod +x pop
