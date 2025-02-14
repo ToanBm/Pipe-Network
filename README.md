@@ -1,5 +1,5 @@
 # Pipe Network Devnet-2 Node Setup Guide
-## Update v0.2.4
+## Update v0.2.5
 ### Check Node's Reputation and Scores
 ```
 cd /root/pipe
@@ -14,7 +14,7 @@ rm -rf pop
 ```
 ### Download new version
 ```
-wget https://dl.pipecdn.app/v0.2.4/pop
+wget https://dl.pipecdn.app/v0.2.5/pop
 ```
 ```
 chmod +x pop
