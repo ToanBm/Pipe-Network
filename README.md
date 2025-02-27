@@ -53,7 +53,7 @@ cd /root/pipe
 ```
 ### 2. Download Pipe binaries
 ```
-wget -O pop "https://dl.pipecdn.app/v0.2.2/pop"
+wget -O pop "https://dl.pipecdn.app/v0.2.8/pop"
 ```
 ### 3. Make pop executable
 ```
@@ -82,8 +82,7 @@ ExecStart=/root/pipe/pop \
     --ram 4 \
     --max-disk 200 \
     --cache-dir /root/pipe/download_cache \
-    --pubKey YOUR-SOL-ADDRESS \
-    --signup-by-referral-route 85e8d2dd4e64f413
+    --pubKey YOUR-SOL-ADDRESS
 Restart=always
 RestartSec=5
 LimitNOFILE=65536
