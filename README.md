@@ -1,3 +1,135 @@
+# Pipe Network Testnet Node Setup Guide
+## Version v0.3.0
+
+## 1. Install required dependencies
+```
+sudo apt update
+sudo apt install -y libssl-dev ca-certificates
+```
+## 2. Applying Configurations
+```
+sudo bash -c 'cat > /etc/sysctl.d/99-popcache.conf << EOL
+net.ipv4.ip_local_port_range = 1024 65535
+net.core.somaxconn = 65535
+net.ipv4.tcp_low_latency = 1
+net.ipv4.tcp_fastopen = 3
+net.ipv4.tcp_slow_start_after_idle = 0
+net.ipv4.tcp_window_scaling = 1
+net.ipv4.tcp_wmem = 4096 65536 16777216
+net.ipv4.tcp_rmem = 4096 87380 16777216
+net.core.wmem_max = 16777216
+net.core.rmem_max = 16777216
+EOL'
+```
+```
+sudo sysctl -p /etc/sysctl.d/99-popcache.conf
+```
+## 2. Increase file limits for performance
+```
+# POP Cache Node file limits
+sudo bash -c 'cat > /etc/security/limits.d/popcache.conf << EOL
+*    hard nofile 65535
+*    soft nofile 65535
+EOL'
+```
+## 3. Installation
+### - Create a directory folder
+```
+sudo mkdir -p /opt/popcache
+cd /opt/popcache
+```
+### - Download the binary
+Link: https://download.pipe.network/
+You'll need the invite code emailed to you.
+### - Upload unzip to folder `popcache`
+```
+sudo tar -xzf pop-v0.3.0-linux-*.tar.gz
+```
+### - Creat `config.json`
+```
+nano config.json
+```
+`Insert the following configuration, adjusting values as needed:`
+```
+{
+  "pop_name": "your-pop-name",
+  "pop_location": "Your Location, Country",
+  "invite_code": "your-invite-code",
+  "server": {
+    "host": "0.0.0.0",
+    "port": 443,
+    "http_port": 80,
+    "workers": 40
+  },
+  "cache_config": {
+    "memory_cache_size_mb": 4096,
+    "disk_cache_path": "./cache",
+    "disk_cache_size_gb": 100,
+    "default_ttl_seconds": 86400,
+    "respect_origin_headers": true,
+    "max_cacheable_size_mb": 1024
+  },
+  "api_endpoints": {
+    "base_url": "https://dataplane.pipenetwork.com"
+  },
+  "identity_config": {
+    "node_name": "your-node-name",
+    "name": "Your Name",
+    "email": "your.email@example.com",
+    "website": "https://your-website.com",
+    "twitter": "your_twitter_handle",
+    "discord": "your_discord_username",
+    "telegram": "your_telegram_handle",
+    "solana_pubkey": "YOUR_SOLANA_WALLET_ADDRESS_FOR_REWARDS"
+  }
+}
+```
+### - Creat Dockerfile
+```
+nano Dockerfile
+```
+```
+FROM ubuntu:24.04
+
+WORKDIR /app
+
+RUN apt update && apt install -y ca-certificates libssl-dev
+
+COPY pop .
+COPY config.json .
+
+ENV POP_CONFIG_PATH=/app/config.json
+RUN chmod +x ./pop
+
+CMD ["./pop"]
+```
+### - Build Docker image
+```
+cd /opt/popcache
+docker build -t pipe-pop .
+```
+### - Start container
+```
+docker run -d \
+  --name pop-node \
+  --restart=always \
+  --network=host \
+  pipe-pop
+```
+## 3. Check your node
+### - Check log
+```
+docker logs -f pop-node
+```
+## ⚠ If you see `Failed to bind HTTP server to port 80` → you can ignore!
+
+
+## --------------------------Done!----------------------------
+
+
+
+
+
 # Pipe Network Devnet-2 Node Setup Guide
 ## Update v0.2.8
 ### Check Node's Reputation and Scores
